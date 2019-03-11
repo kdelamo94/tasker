@@ -7,7 +7,7 @@ let REPEAT_CHOICE = {
 
 class Task{
 
-  constructor(title, description, complete, completionDate, repeat){
+  constructor(title, description, complete, completionDate){
     this.REPEAT_CHOICE = {
       DAILY: 0,
       WEEKLY: 1,
@@ -19,7 +19,6 @@ class Task{
     this.description = description;
     this.complete = complete;
     this.completionDate = completionDate;
-    this.repeat = repeat;
   }
 }
 export default Task;

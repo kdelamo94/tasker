@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './TaskPaperDetailed.css'
 
 class TaskPaperDetailed extends Component {
   constructor(props){
@@ -9,17 +10,30 @@ class TaskPaperDetailed extends Component {
     let task = this.props.task;
     return(
       <div
-        className="TaskPaperDetailed-paper"
+        className="TaskPaperDetailed"
+
       >
         <div
-          className="TaskPaperDetailed-title"
+          className="TaskPaperDetailed-margin"
         >
-          {task.title}
+          <div
+            className="TaskPaperDetailed-hole"
+          >
+          </div>
         </div>
         <div
-          className="TaskPaperDetailed-body"
+          className="TaskPaperDetailed-content"
         >
-        {task.description}
+          <div
+            className="TaskPaperDetailed-title"
+          >
+            {task.title}
+          </div>
+          <div
+            className="TaskPaperDetailed-body"
+          >
+          {task.description}
+          </div>
         </div>
       </div>
     );

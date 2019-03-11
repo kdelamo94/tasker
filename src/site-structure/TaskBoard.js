@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import TaskPaperDetailed from '../citadel/components/TaskPaperDetailed';
 import TaskList from '../citadel/components/TaskList';
 import HeaderBar from '../citadel/components/HeaderBar';
-
+import './TaskBoard.css'
 
 class TaskBoard extends Component{
   constructor(props){
@@ -41,6 +41,14 @@ class TaskBoard extends Component{
         >
           <TaskList
             title="Today's Tasks"
+            taskPapers={todayTaskPapers}
+          />
+          <TaskList
+            title="The Week's Tasks"
+            taskPapers={todayTaskPapers}
+          />
+          <TaskList
+            title="All Other Tasks"
             taskPapers={todayTaskPapers}
           />
         </div>

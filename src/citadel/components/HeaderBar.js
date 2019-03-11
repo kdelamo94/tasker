@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './HeaderBar.css';
 
 class HeaderBar extends Component{
   constructor(props){
