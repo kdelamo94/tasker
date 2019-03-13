@@ -1,0 +1,33 @@
+.TaskList{
+  box-shadow: 10px 10px 10px #888888;
+  height: 100%;
+  width: calc(.33 * calc(100% - 40px));
+}
+
+@media only screen and (max-width: 650px){
+  .TaskList{
+    box-shadow: 10px 10px 10px #888888;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 50px;
+  }
+}
+
+
+
+.TaskList-header{
+  background-color: #FF0303;
+  height: 40px;
+  text-align: center;
+  color: #FFFFFF;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.TaskList-body{
+  padding: 10px;
+  background-color: #E8E8E8;
+  height: calc(100% - 40px - 20px);
+  flex-flow: column nowrap;
+  overflow-y: auto;
+}
