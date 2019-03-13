@@ -24,11 +24,10 @@ class TaskPaperDetailed extends Component {
         <div
           className="TaskPaperDetailed-content"
         >
-          <div
+          <input
             className="TaskPaperDetailed-title"
-          >
-            {task.title}
-          </div>
+            value={task.title}
+          />
           <div
             className="TaskPaperDetailed-body"
           >

@@ -6,13 +6,23 @@
 
 
 .TaskBoard-board{
-  padding: 30px;
-  height: calc(100% - 50px - 60px);
+
+  height: calc(100% - 40px);
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
 }
 
+.TaskBoard-tasklistcontainer{
+height: calc(100% - 50px - 60px);
+  padding: 30px;
+}
+
+.TaskBoard-buttonholder{
+  box-sizing: content-box;
+  width: 100%;
+  text-align: center;
+}
 @media only screen and (max-width: 650px){
   .TaskBoard{
     height: auto;

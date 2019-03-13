@@ -1,0 +1,15 @@
+.CreateButton{
+  margin-bottom: 10px;
+
+}
+
+.CreateButton-button{
+  background:none;
+  border:none;
+  font-family: inherit;
+  color: #FFFFFF;
+  font-size:1em;
+  border-radius: 40px;
+  background-color: #FF0303;
+  box-shadow: 5px 5px 5px #888888;
+}

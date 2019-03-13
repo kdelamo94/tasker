@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import TaskPaperDetailed from '../citadel/components/TaskPaperDetailed';
 import TaskList from '../citadel/components/TaskList';
 import HeaderBar from '../citadel/components/HeaderBar';
-
+import CreateButton from '../citadel/components/CreateButton'
 import Task from '../citadel/utils/Task';
 
 import './TaskBoard.css'
@@ -12,25 +12,25 @@ let MOCK_TASKS = [
     "Simple Task",
     "Just a simple task." ,
     false,
-    new Date()
+    new Date(Date.now())
   ),
   new Task(
     "Another Simple Task",
     "Do another simple task.",
     false,
-    new Date()
+    new Date(Date.now())
   ),
   new Task(
     "Clean Litter",
     "Scoop out clumps and sweep excess litter",
     false,
-    new Date(2019, 2, 13)
+    new Date(Date.UTC(2019, 2, 13))
   ),
   new Task(
     "Fix Air Conditioner",
     "Need to call the repair man at (786) 392-5677",
     false,
-    new Date(2019, 2, 19)
+    new Date(Date.UTC(2019, 2, 19))
   )
 ];
 
@@ -39,14 +39,38 @@ class TaskBoard extends Component{
     super(props);
     this.state = {
       tasks: MOCK_TASKS,
-      todaysTasks: [],
-      theWeeksTasks: [],
-      remainingTasks: [],
-      currentDay: new Date()
+      currentDay: new Date(Date.now())
     }
+
+    //Function Bindings to This
+    this.handleCreateButtonClick = this.handleCreateButtonClick.bind(this);
+
   }
 
+  //Event Handlers
+  handleCreateButtonClick(){
+    let task = new Task(
+      "Title",
+      "Description",
+      false,
+      new Date(Date.now())
+    )
 
+    let tasks = this.state.tasks;
+    tasks.unshift(task);
+    this.setState({
+      tasks: tasks
+    })
+  }
+
+  //Utility Methods
+  updateDate(){
+    this.setState({
+      currentDay: new Date(Date.now())
+    })
+  }
+
+  //Life Cycle Methods
   componentDidMount(){
     this.timer = setInterval(
       () => this.updateDate(),
@@ -58,16 +82,22 @@ class TaskBoard extends Component{
     clearInterval(this.timer);
   }
 
-  updateDate(){
-    this.setState({
-      currentDay: new Date()
-    })
-  }
-  render(){
 
+
+  render(){
+    console.log(this.state.tasks)
     //Retrieve list of todays tasks
     let todayTaskPapers = this.state.tasks.map((task, index) => {
-      if(task.completionDate.toDateString() == (new Date().toDateString())){
+      let dayDiff = Math.abs(
+        task.completionDate.getUTCDate() -
+        (
+          new Date(
+            Date.now()
+          ).getUTCDate()
+        )
+      );
+
+      if(dayDiff == 0){
         return(
           <TaskPaperDetailed
             task={task}
@@ -76,10 +106,19 @@ class TaskBoard extends Component{
       }
     });
 
+    console.log();
     //Retrieve list of the week's tasks
     let theWeekTaskPapers = this.state.tasks.map((task, index) => {
-      let msDifference = Math.abs(task.completionDate - new Date());
-      let dayDiff = Math.floor(msDifference / (24 * 60 * 60 * 1000));
+      let dayDiff = Math.abs(
+        task.completionDate.getUTCDate() -
+        (
+          new Date(
+            Date.now()
+          ).getUTCDate()
+        )
+      );
+
+
       if(dayDiff < 7 && dayDiff > 0){
         return(
           <TaskPaperDetailed
@@ -91,8 +130,8 @@ class TaskBoard extends Component{
 
     //Retrieve the list of remaining tasks
     let remainingTaskPapers = this.state.tasks.map((task, index) => {
-      let msDifference = Math.abs(task.completionDate - new Date());
-      let dayDiff = Math.floor(msDifference / (24 * 60 * 60 * 1000));
+      let dayDiff = Math.abs(task.completionDate.getUTCDate() - (new Date(Date.now()).getUTCDate()));
+
       if(dayDiff >= 7){
         return(
           <TaskPaperDetailed
@@ -105,22 +144,36 @@ class TaskBoard extends Component{
       <div
         className="TaskBoard"
       >
-        <HeaderBar/>
+        <HeaderBar  />
+
+        <div
+          className="TaskBoard-tasklistcontainer"
+        >
+        <div
+          className="TaskBoard-buttonholder"
+        >
+          <CreateButton
+            content="Create New Task"
+            handleClick={this.handleCreateButtonClick}
+          />
+        </div>
         <div
           className="TaskBoard-board"
         >
-          <TaskList
-            title="Today's Tasks"
-            taskPapers={todayTaskPapers}
-          />
-          <TaskList
-            title="The Week's Tasks"
-            taskPapers={theWeekTaskPapers}
-          />
-          <TaskList
-            title="All Other Tasks"
-            taskPapers={remainingTaskPapers}
-          />
+
+            <TaskList
+              title="Today's Tasks"
+              taskPapers={todayTaskPapers}
+            />
+            <TaskList
+              title="The Week's Tasks"
+              taskPapers={theWeekTaskPapers}
+            />
+            <TaskList
+              title="All Other Tasks"
+              taskPapers={remainingTaskPapers}
+            />
+        </div>
         </div>
       </div>
     );

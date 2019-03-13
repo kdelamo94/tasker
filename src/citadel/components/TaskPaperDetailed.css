@@ -23,12 +23,14 @@
 .TaskPaperDetailed-content{
   padding: 5px;
   width: calc(100% - 50px);
+  border: none;
+  font-family: inherit;
 }
 
 .TaskPaperDetailed-title{
   height: 50px;
-
-
+  border: none;
+  font-family: inherit;
 }
 
 .TaskPaperDetailed-body{
