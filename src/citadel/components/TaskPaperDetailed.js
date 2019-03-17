@@ -25,8 +25,10 @@ class TaskPaperDetailed extends Component {
           className="TaskPaperDetailed-content"
         >
           <input
+            id="title"
             className="TaskPaperDetailed-title"
             value={task.title}
+            onChange={(e) => this.props.handleChange(e, this.props.id)}
           />
           <div
             className="TaskPaperDetailed-body"

@@ -44,7 +44,7 @@ class TaskBoard extends Component{
 
     //Function Bindings to This
     this.handleCreateButtonClick = this.handleCreateButtonClick.bind(this);
-
+    this.handleChange = this.handleChange.bind(this);
   }
 
   //Event Handlers
@@ -58,6 +58,14 @@ class TaskBoard extends Component{
 
     let tasks = this.state.tasks;
     tasks.unshift(task);
+    this.setState({
+      tasks: tasks
+    })
+  }
+
+  handleChange(e, key){
+    let tasks = this.state.tasks
+    tasks[key][e.target.id] = e.target.value
     this.setState({
       tasks: tasks
     })
@@ -100,7 +108,10 @@ class TaskBoard extends Component{
       if(dayDiff == 0){
         return(
           <TaskPaperDetailed
+            id={index}
+            key={index}
             task={task}
+            handleChange={this.handleChange}
           />
         );
       }
@@ -122,7 +133,10 @@ class TaskBoard extends Component{
       if(dayDiff < 7 && dayDiff > 0){
         return(
           <TaskPaperDetailed
+            id={index}
+            key={index}
             task={task}
+            handleChange={this.handleChange}
           />
         );
       }
@@ -135,7 +149,10 @@ class TaskBoard extends Component{
       if(dayDiff >= 7){
         return(
           <TaskPaperDetailed
+            id={index}
+            key={index}
             task={task}
+            handleChange={this.handleChange}
           />
         );
       }
