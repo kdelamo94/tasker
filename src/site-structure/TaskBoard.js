@@ -31,15 +31,23 @@ let MOCK_TASKS = [
     "Need to call the repair man at (786) 392-5677",
     false,
     new Date(Date.UTC(2019, 2, 19))
+  ),
+  new Task(
+    "April Task",
+    "Some task for april",
+    false,
+    new Date(Date.UTC(2019, 4, 5))
   )
 ];
+
+const msPerDay = 24 * 60 * 60 * 1000
 
 class TaskBoard extends Component{
   constructor(props){
     super(props);
     this.state = {
       tasks: MOCK_TASKS,
-      currentDay: new Date(Date.now())
+      currentDay: new Date()
     }
 
     //Function Bindings to This
@@ -53,7 +61,7 @@ class TaskBoard extends Component{
       "Title",
       "Description",
       false,
-      new Date(Date.now())
+      new Date()
     )
 
     let tasks = this.state.tasks;
@@ -74,7 +82,7 @@ class TaskBoard extends Component{
   //Utility Methods
   updateDate(){
     this.setState({
-      currentDay: new Date(Date.now())
+      currentDay: new Date()
     })
   }
 
@@ -93,19 +101,17 @@ class TaskBoard extends Component{
 
 
   render(){
-    console.log(this.state.tasks)
-    //Retrieve list of todays tasks
-    let todayTaskPapers = this.state.tasks.map((task, index) => {
-      let dayDiff = Math.abs(
-        task.completionDate.getUTCDate() -
-        (
-          new Date(
-            Date.now()
-          ).getUTCDate()
-        )
-      );
 
-      if(dayDiff == 0){
+    //Retrieve list of todays tasks
+    let tasks = this.state.tasks;
+    tasks.sort((a, b) => {
+      return a.completionDate - b.completionDate
+    })
+
+    let todayTaskPapers = tasks.map((task, index) => {
+      let dayDiff = (task.completionDate -new Date())/msPerDay;
+
+      if(dayDiff <= 0){
         return(
           <TaskPaperDetailed
             id={index}
@@ -117,17 +123,10 @@ class TaskBoard extends Component{
       }
     });
 
-    console.log();
     //Retrieve list of the week's tasks
     let theWeekTaskPapers = this.state.tasks.map((task, index) => {
-      let dayDiff = Math.abs(
-        task.completionDate.getUTCDate() -
-        (
-          new Date(
-            Date.now()
-          ).getUTCDate()
-        )
-      );
+      let dayDiff =
+        (task.completionDate - new Date())/msPerDay;
 
 
       if(dayDiff < 7 && dayDiff > 0){
@@ -144,7 +143,7 @@ class TaskBoard extends Component{
 
     //Retrieve the list of remaining tasks
     let remainingTaskPapers = this.state.tasks.map((task, index) => {
-      let dayDiff = Math.abs(task.completionDate.getUTCDate() - (new Date(Date.now()).getUTCDate()));
+      let dayDiff = (task.completionDate - new Date())/msPerDay;
 
       if(dayDiff >= 7){
         return(
