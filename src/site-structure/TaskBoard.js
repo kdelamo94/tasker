@@ -24,19 +24,19 @@ let MOCK_TASKS = [
     "Clean Litter",
     "Scoop out clumps and sweep excess litter",
     false,
-    new Date(Date.UTC(2019, 2, 13))
+    new Date(2019, 2, 19)
   ),
   new Task(
     "Fix Air Conditioner",
     "Need to call the repair man at (786) 392-5677",
     false,
-    new Date(Date.UTC(2019, 2, 19))
+    new Date(2019, 2, 19)
   ),
   new Task(
     "April Task",
     "Some task for april",
     false,
-    new Date(Date.UTC(2019, 4, 5))
+    new Date(2019, 3, 5)
   )
 ];
 
@@ -53,6 +53,8 @@ class TaskBoard extends Component{
     //Function Bindings to This
     this.handleCreateButtonClick = this.handleCreateButtonClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
+
   }
 
   //Event Handlers
@@ -61,7 +63,7 @@ class TaskBoard extends Component{
       "Title",
       "Description",
       false,
-      new Date()
+      new Date(new Date().getFullYear(), 0, 1)
     )
 
     let tasks = this.state.tasks;
@@ -72,8 +74,28 @@ class TaskBoard extends Component{
   }
 
   handleChange(e, key){
-    let tasks = this.state.tasks
-    tasks[key][e.target.id] = e.target.value
+    let tasks = this.state.tasks;
+    tasks[key][e.target.id] = e.target.value;
+    this.setState({
+      tasks: tasks
+    });
+  }
+
+  handleDateChange(e, key){
+    let tasks = this.state.tasks;
+
+    if(e.target.id == "m"){
+      tasks[key].completionDate.setMonth(e.target.value);
+    }
+
+    if(e.target.id == "d"){
+      tasks[key].completionDate.setDate(e.target.value);
+    }
+
+    if(e.target.id == "y"){
+      tasks[key].completionDate.setFullYear(e.target.value);
+    }
+
     this.setState({
       tasks: tasks
     })
@@ -104,7 +126,11 @@ class TaskBoard extends Component{
 
     //Retrieve list of todays tasks
     let tasks = this.state.tasks;
-    tasks.sort((a, b) => {
+
+    this.state.tasks.sort((a, b) => {
+      if(a.completionDate == null){
+        return -1
+      }
       return a.completionDate - b.completionDate
     })
 
@@ -118,6 +144,7 @@ class TaskBoard extends Component{
             key={index}
             task={task}
             handleChange={this.handleChange}
+            handleDateChange={this.handleDateChange}
           />
         );
       }
@@ -136,6 +163,7 @@ class TaskBoard extends Component{
             key={index}
             task={task}
             handleChange={this.handleChange}
+            handleDateChange={this.handleDateChange}
           />
         );
       }
@@ -152,6 +180,7 @@ class TaskBoard extends Component{
             key={index}
             task={task}
             handleChange={this.handleChange}
+            handleDateChange={this.handleDateChange}
           />
         );
       }

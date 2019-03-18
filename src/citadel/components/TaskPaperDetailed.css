@@ -29,11 +29,14 @@
 
 .TaskPaperDetailed-title{
   height: 50px;
+  width: 100%;
   border: none;
   font-family: inherit;
 }
 
 .TaskPaperDetailed-body{
-font-size: 12px;
-
+  font-size: 12px;
+  width: 100%;
+  font-family: inherit;
+  height: auto;
 }
