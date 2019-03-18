@@ -10,6 +10,9 @@
  width: 30px;
  padding: 10px;
  border-right: pink solid 2px;
+ display: flex;
+ flex-flow: column nowrap;
+ justify-content: space-between;
 }
 
 .TaskPaperDetailed-hole{

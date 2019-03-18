@@ -54,7 +54,7 @@ class TaskBoard extends Component{
     this.handleCreateButtonClick = this.handleCreateButtonClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
-
+    this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this);
   }
 
   //Event Handlers
@@ -68,6 +68,14 @@ class TaskBoard extends Component{
 
     let tasks = this.state.tasks;
     tasks.unshift(task);
+    this.setState({
+      tasks: tasks
+    })
+  }
+
+  handleDeleteButtonClick(e, key){
+    let tasks = this.state.tasks;
+    tasks.splice(key, 1);
     this.setState({
       tasks: tasks
     })
@@ -145,6 +153,7 @@ class TaskBoard extends Component{
             task={task}
             handleChange={this.handleChange}
             handleDateChange={this.handleDateChange}
+            handleDeleteClick={this.handleDeleteButtonClick}
           />
         );
       }
@@ -164,6 +173,7 @@ class TaskBoard extends Component{
             task={task}
             handleChange={this.handleChange}
             handleDateChange={this.handleDateChange}
+            handleDeleteClick ={this.handleDeleteButtonClick}
           />
         );
       }
@@ -181,6 +191,7 @@ class TaskBoard extends Component{
             task={task}
             handleChange={this.handleChange}
             handleDateChange={this.handleDateChange}
+            handleDeleteClick={this.handleDeleteButtonClick}
           />
         );
       }

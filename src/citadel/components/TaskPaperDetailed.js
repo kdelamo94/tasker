@@ -48,6 +48,11 @@ class TaskPaperDetailed extends Component {
             className="TaskPaperDetailed-hole"
           >
           </div>
+          <img
+            src="delete.png"
+            height="30px"
+            onClick={(e) => this.props.handleDeleteClick(e, this.props.id)}
+          />
         </div>
         <div
           className="TaskPaperDetailed-content"
