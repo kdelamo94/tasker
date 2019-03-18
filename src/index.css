@@ -17,6 +17,7 @@ code {
 
 select{
   font-family: inherit;
+  color: inherit;
   font-size: .6em;
   border: none;
   -moz-appearance: none;

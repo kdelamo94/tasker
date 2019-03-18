@@ -14,7 +14,7 @@
 }
 
 .TaskBoard-tasklistcontainer{
-height: calc(100% - 50px - 60px);
+  height: calc(100% - 50px - 60px);
   padding: 30px;
 }
 
@@ -23,7 +23,7 @@ height: calc(100% - 50px - 60px);
   width: 100%;
   text-align: center;
 }
-@media only screen and (max-width: 650px){
+@media only screen and (max-width: 1000px){
   .TaskBoard{
     height: auto;
   }

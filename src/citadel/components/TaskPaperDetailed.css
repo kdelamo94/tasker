@@ -32,6 +32,8 @@
   width: 100%;
   border: none;
   font-family: inherit;
+  font-size: 1em;
+  color: inherit;
 }
 
 .TaskPaperDetailed-body{
@@ -39,4 +41,5 @@
   width: 100%;
   font-family: inherit;
   height: auto;
+  font-size: .75em;
 }
