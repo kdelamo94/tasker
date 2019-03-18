@@ -4,7 +4,7 @@
   width: calc(.33 * calc(100% - 40px));
 }
 
-@media only screen and (max-width: 650px){
+@media only screen and (max-width: 1000px){
   .TaskList{
     box-shadow: 10px 10px 10px #888888;
     height: 100%;
