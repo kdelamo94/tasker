@@ -14,3 +14,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+select{
+  font-family: inherit;
+  color: inherit;
+  font-size: .6em;
+  border: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+select::-ms-expand{
+  display: none;
+}
